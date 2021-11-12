@@ -30,3 +30,8 @@ RUN echo '\
     opcache.max_accelerated_files=16000\n\
     opcache.save_comments=Off\n\
     ' >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini
+
+ENV COMPOSER_HOME /composer
+ENV PATH ./vendor/bin:/composer/vendor/bin:$PATH
+ENV COMPOSER_ALLOW_SUPERUSER 1
+RUN curl -s https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin/ --filename=composer
