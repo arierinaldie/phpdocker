@@ -24,12 +24,10 @@ RUN docker-php-source extract \
     && docker-php-ext-install apcu \
     && docker-php-source delete
 
-RUN echo '\
-    opcache.interned_strings_buffer=16\n\
-    opcache.load_comments=Off\n\
-    opcache.max_accelerated_files=16000\n\
-    opcache.save_comments=Off\n\
-    ' >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini
+RUN echo 'opcache.interned_strings_buffer=16' >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini \
+    && echo 'opcache.load_comments=Off' >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini \
+    && echo 'opcache.max_accelerated_files=16000' >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini \
+    && echo 'opcache.save_comments=Off' >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini
 
 ENV COMPOSER_HOME /composer
 ENV PATH ./vendor/bin:/composer/vendor/bin:$PATH
