@@ -1,14 +1,15 @@
 FROM php:7.4-fpm
 
 RUN apt-get update \
-    && apt-get install --no-install-recommends --no-upgrade -y --virtual .phpize-deps $PHPIZE_DEPS nano openjdk8-jre zip unzip wget \
-    && apt-get install --no-install-recommends --no-upgrade -y libzip-dev pcre-dev postgresql-dev libmemcached-dev oniguruma-dev libxml2-dev freetype-dev libjpeg-turbo-dev libpng-dev icu-dev \
+    && apt-get install --no-install-recommends --no-upgrade -y nano zip unzip wget software-properties-common \
+    && apt-get install --no-install-recommends --no-upgrade -y default-jre libzip-dev libpcre3-dev libicu-dev libpq-dev libmemcached-dev libonig-dev libxml2-dev libfreetype-dev libjpeg-dev libpng-dev \
+    && docker-php-ext-configure pgsql --with-pgsql=/usr/local/pgsql \
     && docker-php-ext-install exif pdo pdo_mysql mysqli pdo_pgsql pgsql bcmath ctype fileinfo json mbstring tokenizer opcache \
     && docker-php-ext-install zip intl xml dom xmlrpc xmlwriter gd sockets \
     && docker-php-ext-install -j$(nproc) iconv \
     && rm -rf /tmp/*
 
-RUN apt-get install --no-install-recommends --no-upgrade -y supervisor git openssh curl-dev \
+RUN apt-get install --no-install-recommends --no-upgrade -y supervisor git openssh-client libcurl4-openssl-dev \
     && docker-php-ext-install curl \
     && rm -rf /tmp/*
 
