@@ -13,10 +13,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@master
+    - uses: actions/checkout@7.4-fpm-alpine
     - name: Build 7.4-fpm-alpine docker images
       run: |
         cd 7.4-fpm-alpine
         docker build -t xamarie/phpdocker:7.4-fpm-alpine .
         docker login --username=${{ secrets.DOCKER_HUB_USER }} --password=${{ secrets.DOCKER_HUB_PASS }} docker.io
         docker push xamarie/phpdocker:7.4-fpm-alpine
+    - uses: actions/checkout@7.4-fpm
+    - name: Build 7.4-fpm docker images
+      run: |
+        cd 7.4-fpm
+        docker build -t xamarie/phpdocker:7.4-fpm .
+        docker login --username=${{ secrets.DOCKER_HUB_USER }} --password=${{ secrets.DOCKER_HUB_PASS }} docker.io
+        docker push xamarie/phpdocker:7.4-fpm
