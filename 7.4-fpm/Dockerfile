@@ -2,7 +2,7 @@ FROM php:7.4-fpm
 
 RUN apt-get update \
     && apt-get install --no-install-recommends --no-upgrade -y nano zip unzip wget software-properties-common \
-    && apt-get install --no-install-recommends --no-upgrade -y default-jre libzip-dev libpcre3-dev libicu-dev libpq-dev libmemcached-dev libonig-dev libxml2-dev libfreetype-dev libjpeg-dev libpng-dev \
+    && apt-get install --no-install-recommends --no-upgrade -y libzip-dev libpcre3-dev libicu-dev libpq-dev libmemcached-dev libonig-dev libxml2-dev libfreetype-dev libjpeg-dev libpng-dev \
     && docker-php-ext-configure pgsql --with-pgsql=/usr/local/pgsql \
     && docker-php-ext-install exif pdo pdo_mysql mysqli pdo_pgsql pgsql bcmath ctype fileinfo json mbstring tokenizer opcache \
     && docker-php-ext-install zip intl xml dom xmlrpc xmlwriter gd sockets \
