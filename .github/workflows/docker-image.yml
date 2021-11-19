@@ -18,4 +18,5 @@ jobs:
       run: |
         cd 7.4-fpm-alpine
         docker build -t xamarie/phpdocker:7.4-fpm-alpine .
+        docker tag github-build-7.4-fpm-alpine xamarie/phpdocker:7.4-fpm-alpine
         docker push xamarie/phpdocker:7.4-fpm-alpine
