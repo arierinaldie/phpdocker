@@ -42,4 +42,4 @@ for every image in this repo, it already contains:
 
 this repo is open for all to contribute to make php image better, stable and ready to use. please use the `main` branch as a base to create a new branch for the new image. all images that have been successfully developed and tested can be merge to `master`.
 
-All `xamarie/php` images available at [docker hub](https://hub.docker.com/r/xamarie/phpdocker/tags).
+All `xamarie/phpdocker` images available at [docker hub](https://hub.docker.com/r/xamarie/phpdocker/tags).
