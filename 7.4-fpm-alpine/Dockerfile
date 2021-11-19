@@ -1,6 +1,6 @@
 FROM php:7.4-fpm-alpine3.11
 
-RUN apk add --no-cache --virtual .phpize-deps $PHPIZE_DEPS nano openjdk8-jre zip unzip wget \
+RUN apk add --no-cache --virtual .phpize-deps $PHPIZE_DEPS nano zip unzip wget \
     && apk add --no-cache libzip-dev pcre-dev postgresql-dev libmemcached-dev oniguruma-dev libxml2-dev freetype-dev libjpeg-turbo-dev libpng-dev icu-dev \
     && docker-php-ext-install exif pdo pdo_mysql mysqli pdo_pgsql pgsql bcmath ctype fileinfo json mbstring tokenizer opcache \
     && docker-php-ext-install zip intl xml dom xmlrpc xmlwriter gd sockets \
@@ -33,3 +33,8 @@ ENV COMPOSER_HOME /composer
 ENV PATH ./vendor/bin:/composer/vendor/bin:$PATH
 ENV COMPOSER_ALLOW_SUPERUSER 1
 RUN curl -s https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin/ --filename=composer
+
+COPY ./supervisord.conf /etc/supervisor
+EXPOSE 9001
+
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/supervisord.conf"]
