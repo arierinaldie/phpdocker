@@ -1,6 +1,6 @@
 ## [xamarie/phpdocker](https://github.com/xamarie/phpdocker)
 
-This is the Git repo for `xamarie/phpdocker`, preinstalled php based extention to run or develope application using php. This image based on official [`php`](https://hub.docker.com/_/php/). See [the Docker Hub page](https://hub.docker.com/_/php/) for any official references.
+This is the Git repo for `xamarie/phpdocker`, preinstalled php based extention to run or develope application using php. This image based on official [`php`](https://hub.docker.com/_/php/). See [the Docker Hub page](https://hub.docker.com/_/php/) for any php official images references.
 
 for every image in this repo, it already contains:
 * php ext installed:
