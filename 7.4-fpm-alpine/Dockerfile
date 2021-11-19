@@ -34,7 +34,8 @@ ENV PATH ./vendor/bin:/composer/vendor/bin:$PATH
 ENV COMPOSER_ALLOW_SUPERUSER 1
 RUN curl -s https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin/ --filename=composer
 
-COPY ./supervisord.conf /etc/supervisor
+COPY ./supervisord.conf /etc
+RUN mkdir /var/log/supervisor /etc/supervisor /etc/supervisor/conf.d
 EXPOSE 9001
 
-CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/supervisord.conf"]
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
