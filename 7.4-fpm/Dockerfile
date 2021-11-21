@@ -41,3 +41,5 @@ COPY ./supervisord.conf /etc/supervisor
 EXPOSE 9001
 
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/supervisord.conf"]
+
+USER www-data
