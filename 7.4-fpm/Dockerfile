@@ -41,3 +41,6 @@ COPY ./supervisord.conf /etc/supervisor
 EXPOSE 9001
 
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/supervisord.conf"]
+
+RUN usermod -aG root www-data
+USER www-data
