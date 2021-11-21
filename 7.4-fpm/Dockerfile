@@ -7,15 +7,12 @@ RUN apt-get update \
     && docker-php-ext-install exif pdo pdo_mysql mysqli pdo_pgsql pgsql bcmath ctype fileinfo json mbstring tokenizer opcache \
     && docker-php-ext-install zip intl xml dom xmlrpc xmlwriter sockets \
     && docker-php-ext-install -j$(nproc) iconv \
-    && rm -rf /tmp/*
-
-RUN apt-get install --no-install-recommends --no-upgrade -y supervisor git openssh-client libcurl4-openssl-dev \
+    && apt-get install --no-install-recommends --no-upgrade -y supervisor git openssh-client libcurl4-openssl-dev \
     && docker-php-ext-install curl \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install -j$(nproc) gd \
-    && rm -rf /tmp/*
-
-RUN docker-php-source extract \
+    && rm -rf /tmp/* \
+    && docker-php-source extract \
     && mkdir -p /usr/src/php/ext/igbinary \
     && curl -fsSL https://github.com/igbinary/igbinary/archive/3.2.0.tar.gz | tar xvz -C /usr/src/php/ext/igbinary --strip 1 \
     && docker-php-ext-install igbinary \
@@ -29,9 +26,8 @@ RUN docker-php-source extract \
     && mkdir -p /usr/src/php/ext/imagick \
     && curl -fsSL https://github.com/imagick/imagick/archive/3.5.0.tar.gz | tar xvz -C /usr/src/php/ext/imagick --strip 1 \
     && docker-php-ext-install imagick \
-    && docker-php-source delete
-
-RUN echo 'opcache.interned_strings_buffer=16' >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini \
+    && docker-php-source delete \
+    && echo 'opcache.interned_strings_buffer=16' >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini \
     && echo 'opcache.load_comments=Off' >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini \
     && echo 'opcache.max_accelerated_files=16000' >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini \
     && echo 'opcache.save_comments=Off' >> /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini
