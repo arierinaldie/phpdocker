@@ -3,12 +3,14 @@ FROM php:7.4-fpm-alpine3.11
 RUN apk add --no-cache --virtual .phpize-deps $PHPIZE_DEPS nano zip unzip wget \
     && apk add --no-cache libzip-dev pcre-dev postgresql-dev imagemagick-dev libmemcached-dev oniguruma-dev libxml2-dev freetype-dev libjpeg-turbo-dev libpng-dev icu-dev \
     && docker-php-ext-install exif pdo pdo_mysql mysqli pdo_pgsql pgsql bcmath ctype fileinfo json mbstring tokenizer opcache \
-    && docker-php-ext-install zip intl xml dom xmlrpc xmlwriter gd sockets \
+    && docker-php-ext-install zip intl xml dom xmlrpc xmlwriter sockets \
     && docker-php-ext-install -j$(nproc) iconv \
     && rm -rf /tmp/*
 
 RUN apk add --no-cache supervisor git openssh curl-dev \
     && docker-php-ext-install curl \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-install -j$(nproc) gd \
     && rm -rf /tmp/*
 
 RUN docker-php-source extract \
